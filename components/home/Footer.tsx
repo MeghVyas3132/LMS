@@ -196,7 +196,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-          <p>&copy; {new Date().getFullYear()} Cloud Institution. All rights reserved. | Powered By Cloud Institution</p>
+          <p>&copy; {new Date().getFullYear()} Chitragupt. All rights reserved. | Powered By Chitragupt</p>
         </div>
       </div>
     </footer>

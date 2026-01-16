@@ -60,7 +60,7 @@ export default function ContactPage() {
               Contact Us
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white">
-              Get in Touch with Cloud Institution
+              Get in Touch with Chitragupt
             </h1>
             <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
               Have questions about our courses? Need guidance on your career path? Our expert counselors are here to help you make the right choice for your future.
@@ -284,7 +284,7 @@ export default function ContactPage() {
               },
               {
                 question: "Do you provide certificates?",
-                answer: "Yes, upon successful completion of any course, you will receive an industry-recognized certificate from Cloud Institution."
+                answer: "Yes, upon successful completion of any course, you will receive an industry-recognized certificate from Chitragupt."
               }
             ].map((faq, index) => (
               <Card key={index} className="dark:bg-slate-800">
