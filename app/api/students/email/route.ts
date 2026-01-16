@@ -2,19 +2,27 @@ import { NextRequest, NextResponse } from 'next/server';
 import * as admin from 'firebase-admin';
 import { Resend } from 'resend';
 
-// Initialize Firebase Admin if it hasn't been already
-if (!admin.apps.length) {
-  admin.initializeApp({
-    credential: admin.credential.cert({
-      projectId: process.env.FIREBASE_PROJECT_ID,
-      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-      privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
-    }),
-  });
+// Lazy initialization function - only initializes when actually called at runtime
+function getFirebaseAdmin() {
+  if (!admin.apps.length) {
+    if (!process.env.FIREBASE_PROJECT_ID || !process.env.FIREBASE_CLIENT_EMAIL || !process.env.FIREBASE_PRIVATE_KEY) {
+      throw new Error('Firebase Admin environment variables are not configured');
+    }
+    admin.initializeApp({
+      credential: admin.credential.cert({
+        projectId: process.env.FIREBASE_PROJECT_ID,
+        clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+        privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+      }),
+    });
+  }
+  return admin;
 }
 
-// Get Firestore instance
-const db = admin.firestore();
+// Lazy getter for Firestore - only called at runtime
+function getDb() {
+  return getFirebaseAdmin().firestore();
+}
 
 // Initialize Resend with API key
 const resend = new Resend(process.env.RESEND_API_KEY || 're_123456789');
@@ -119,6 +127,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Fetch student data from Firestore
+    const db = getDb();
     const studentsRef = db.collection('students');
     const studentEmails: { email: string; name: string; id: string }[] = [];
 

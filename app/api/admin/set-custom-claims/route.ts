@@ -4,19 +4,23 @@
 import { NextRequest, NextResponse } from 'next/server';
 import * as admin from 'firebase-admin';
 
-// Initialize Firebase Admin if it hasn't been already
-if (!admin.apps.length) {
-  // You should use environment variables for these values in production
-  admin.initializeApp({
-    credential: admin.credential.cert({
-      projectId: process.env.FIREBASE_PROJECT_ID,
-      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-      // The private key needs to have newlines replaced
-      privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
-    }),
-    // If you're using other Firebase services like Storage, include them here
-    // storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
-  });
+// Lazy initialization function - only initializes when actually called at runtime
+function getFirebaseAdmin() {
+  if (!admin.apps.length) {
+    // Check if required env vars exist before initializing
+    if (!process.env.FIREBASE_PROJECT_ID || !process.env.FIREBASE_CLIENT_EMAIL || !process.env.FIREBASE_PRIVATE_KEY) {
+      throw new Error('Firebase Admin environment variables are not configured');
+    }
+    
+    admin.initializeApp({
+      credential: admin.credential.cert({
+        projectId: process.env.FIREBASE_PROJECT_ID,
+        clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+        privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+      }),
+    });
+  }
+  return admin;
 }
 
 // Define types for the request body
@@ -45,7 +49,8 @@ export async function POST(request: NextRequest) {
     }
     
     // Set the custom claims on the user
-    await admin.auth().setCustomUserClaims(uid, claims);
+    const adminInstance = getFirebaseAdmin();
+    await adminInstance.auth().setCustomUserClaims(uid, claims);
     
     // Return success response
     return NextResponse.json({ success: true });
