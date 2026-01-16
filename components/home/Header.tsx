@@ -43,12 +43,12 @@ export default function Header() {
         <Link href="/" className="flex items-center gap-2">
           <Image 
             src="/cloudinstitution_logo.png" 
-            alt="Cloud Institution Logo"
+            alt="Chitragupt Logo"
             width={40}
             height={40}
             className="object-contain"
           />
-          <span className="font-bold text-xl text-emerald-800 dark:text-emerald-400">Cloud Institution</span>
+          <span className="font-bold text-xl text-emerald-800 dark:text-emerald-400">Chitragupt</span>
         </Link>
         
         {/* Desktop Navigation */}

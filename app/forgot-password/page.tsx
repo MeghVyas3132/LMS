@@ -278,7 +278,7 @@ export default function ForgotPasswordPage() {
       {/* Logo */}
       <Link href="/" className="absolute top-6 right-6 flex items-center gap-2 text-slate-100 hover:text-emerald-400 transition-colors z-10">
         <GraduationCap className="h-8 w-8 text-emerald-400" />
-        <span className="font-bold text-2xl text-emerald-400">Cloud Institution</span>
+        <span className="font-bold text-2xl text-emerald-400">Chitragupt</span>
       </Link>
 
       <Card className="w-full max-w-md border-none shadow-lg relative z-10 overflow-hidden bg-slate-800/50 backdrop-blur-sm">

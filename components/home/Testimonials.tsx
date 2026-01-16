@@ -59,7 +59,7 @@ const realTestimonials = [
     name: "Karthik Reddy",
     role: "Azure Cloud Engineer at Microsoft",
     image: "/placeholder-user.jpg",
-    testimonial: "Cloud Institution's Azure training was comprehensive and hands-on. The practical labs and real-world scenarios prepared me perfectly for my current role.",
+    testimonial: "Chitragupt's Azure training was comprehensive and hands-on. The practical labs and real-world scenarios prepared me perfectly for my current role.",
     rating: 5,
     course: "Azure Certification"
   },
@@ -99,7 +99,7 @@ export default function Testimonials() {
           </div>
           <h2 className="text-3xl font-bold mb-4 text-gray-900 dark:text-slate-100">What Our Students Say</h2>
           <p className="text-gray-600 dark:text-slate-300 max-w-2xl mx-auto">
-            Hear from our graduates who have successfully transformed their careers with Cloud Institution.
+            Hear from our graduates who have successfully transformed their careers with Chitragupt.
           </p>
         </div>            
         

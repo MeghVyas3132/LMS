@@ -4,7 +4,7 @@ export default function AboutPage() {
       <div className="container mx-auto px-4 py-20">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white">
-            About Cloud Institution
+            About Chitragupt
           </h1>
           <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
             We are a premier education institution focused on providing quality technical training and career development programs.

@@ -113,7 +113,7 @@ export default function StudentLayout({ children }: StudentLayoutProps) {
             <div className="flex items-center flex-shrink-0 px-4 mb-5">
               <Link href="/student/dashboard" className="flex items-center gap-2">
                 <GraduationCap className="h-8 w-8 text-primary" />
-                <span className="font-bold text-xl">Cloud Institution</span>
+                <span className="font-bold text-xl">Chitragupt</span>
               </Link>
             </div>
             <nav className="flex-1 px-2 pb-4 space-y-1">
@@ -194,7 +194,7 @@ export default function StudentLayout({ children }: StudentLayoutProps) {
               <div className="flex items-center flex-shrink-0 px-4 h-14 border-b">
                 <Link href="/student/dashboard" className="flex items-center gap-2">
                   <GraduationCap className="h-6 w-6 text-primary" />
-                  <span className="font-bold text-lg">Cloud Institution</span>
+                  <span className="font-bold text-lg">Chitragupt</span>
                 </Link>
               </div>
               <nav className="flex-1 px-2 py-4 space-y-1 overflow-y-auto">

@@ -112,7 +112,7 @@ export default function LoginPage() {
         Back to Home
       </Link>      <Link href="/" className="flex items-center gap-2 mb-8">
         <GraduationCap className="h-12 w-12 text-emerald-400" />
-        <span className="font-bold text-2xl text-emerald-400">Cloud Institution</span>
+        <span className="font-bold text-2xl text-emerald-400">Chitragupt</span>
       </Link><Card className="w-full max-w-md border-none shadow-lg relative z-10 overflow-hidden bg-slate-800/50 backdrop-blur-sm">
         <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-emerald-500 to-emerald-400"></div>
         <CardHeader className="space-y-1 pb-6">
@@ -195,7 +195,7 @@ export default function LoginPage() {
       </Card>
 
       <div className="mt-8 text-center text-sm text-slate-500">
-        <p>© {new Date().getFullYear()} Cloud Institution. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} Chitragupt. All rights reserved.</p>
       </div>
     </div>
   )

@@ -42,7 +42,7 @@ export default function WhyChooseUs() {
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <div className="inline-block px-3 py-1 bg-emerald-100 dark:bg-emerald-900/50 text-emerald-800 dark:text-emerald-300 rounded-full text-sm font-medium mb-2">
-            Why Choose Cloud Institution?
+            Why Choose Chitragupt?
           </div>
           <h2 className="text-3xl font-bold mb-4 text-gray-900 dark:text-slate-100">Our Competitive Advantages</h2>
           <p className="text-gray-600 dark:text-slate-300 max-w-2xl mx-auto">

@@ -1,9 +1,9 @@
-# 🎓 Cloud Institution LMS Portal
+# 🎓 Chitragupt LMS Portal
 [![Live Site](https://img.shields.io/badge/live-cloudinstitution.in-007ACC)](https://www.cloudinstitution.in/) [![Tech: Next.js](https://img.shields.io/badge/Next.js-14-black)](https://nextjs.org/) [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)](https://www.typescriptlang.org/) [![License](https://img.shields.io/badge/license-Check%20with%20Cloud%20Institution-lightgrey)](#)
 
 🚀 Live product: https://www.cloudinstitution.in/
 
-A comprehensive Learning Management System (LMS) built with Next.js and TypeScript. I built this LMS portal for Cloud Institution during a 3‑month internship — the product is production-ready and used by teachers and students for course delivery, attendance, assessments (including auto-graded programming challenges), reporting, and exports.
+A comprehensive Learning Management System (LMS) built with Next.js and TypeScript. I built this LMS portal for Chitragupt during a 3‑month internship — the product is production-ready and used by teachers and students for course delivery, attendance, assessments (including auto-graded programming challenges), reporting, and exports.
 
 <img width="1365" height="628" alt="image" src="https://github.com/user-attachments/assets/f620ba46-c812-4cfc-bd52-a466aceaa0f1" />
 
@@ -50,7 +50,7 @@ My role & contributions — 🧑‍💼 Lead Application Developer
 ---
 
 🧭 Problem statement
-- Many small training institutes use disjointed tools for content, attendance, and assessments. Cloud Institution needed a single, reliable platform that unified these concerns while remaining fast, secure, and mobile-first.
+- Many small training institutes use disjointed tools for content, attendance, and assessments. Chitragupt needed a single, reliable platform that unified these concerns while remaining fast, secure, and mobile-first.
 
 💡 Solution overview
 - Built a unified LMS that combines course content, student management, QR attendance, quizzes, programming assessments, and exportable analytics. Emphasis was placed on: modular components, secure external integrations (Judge0), and reliable data flows (Firestore + server-side helpers).
@@ -144,6 +144,6 @@ Architecture & where to look
 - Hooks: `hooks/` (`use-attendance.ts`, `use-toast.ts`)
 
 Notes & permissions
-- Built during a 3‑month internship at Cloud Institution. Confirm permissions before publishing or reusing code publicly.
+- Built during a 3‑month internship at Chitragupt. Confirm permissions before publishing or reusing code publicly.
 
 ----

@@ -8,8 +8,8 @@ import "./globals.css"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata = {
-  title: "Cloud Institution - LMS Platform",
-  description: "Cloud Institution Learning Management System - Empowering Your Future with Quality Education",
+  title: "Chitragupt - LMS Platform",
+  description: "Chitragupt Learning Management System - Empowering Your Future with Quality Education",
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },

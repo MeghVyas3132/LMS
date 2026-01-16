@@ -11,10 +11,10 @@ export default function Footer() {
           <div>
             <Link href="/" className="flex items-center gap-2 mb-4">
               <GraduationCap className="h-6 w-6 text-emerald-400" />
-              <span className="font-bold text-lg text-white">Cloud Institution</span>
+              <span className="font-bold text-lg text-white">Chitragupt</span>
             </Link>
             <p className="text-gray-400 mb-4">
-              At Cloud Institution, your trusted tech education hub in BTM Layout, Bangalore, we provide personalized, hands-on training in AWS, Azure, Google Cloud, DevOps, and more.
+              At Chitragupt, your trusted tech education hub in BTM Layout, Bangalore, we provide personalized, hands-on training in AWS, Azure, Google Cloud, DevOps, and more.
             </p>
             <div className="flex gap-4">
               <a

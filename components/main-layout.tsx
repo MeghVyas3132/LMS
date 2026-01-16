@@ -44,7 +44,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
           <Link href="/" className="flex items-center gap-2">
             <GraduationCap className="h-8 w-8 text-emerald-600 dark:text-emerald-500" />
-            <span className="font-bold text-xl text-emerald-800 dark:text-emerald-400">Cloud Institution</span>
+            <span className="font-bold text-xl text-emerald-800 dark:text-emerald-400">Chitragupt</span>
           </Link>
           
           {/* Desktop Navigation */}
@@ -142,7 +142,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
             <div>
               <Link href="/" className="flex items-center gap-2 mb-4">
                 <GraduationCap className="h-6 w-6 text-emerald-500" />
-                <span className="font-bold text-lg text-slate-50">Cloud Institution</span>
+                <span className="font-bold text-lg text-slate-50">Chitragupt</span>
               </Link>
               <p className="text-slate-400">
                 Empowering individuals with the skills they need to succeed in the digital world.
@@ -187,7 +187,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
             <div>
               <h3 className="font-semibold text-lg mb-4 text-emerald-400">Contact Us</h3>
               <address className="not-italic text-gray-400">
-                <p>Cloud Institution</p>
+                <p>Chitragupt</p>
                 <p>123 Learning Street</p>
                 <p>Education City, 12345</p>
               </address>
