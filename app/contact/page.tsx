@@ -9,17 +9,17 @@ import MainLayout from "@/components/main-layout"
 export default function ContactPage() {
   const contactInfo = [
     {
-      title: "Bangalore Office",
-      address: "No 15, 20th Main, 100ft Ring Road, BTM 2nd Stage, Bangalore – 560076",
-      phone: "+91 76763 70336",
+      title: "Yamlok Office",
+      address: "Yamlok",
+      phone: "+91 1111110000",
       email: "info@cloudinstitution.com",
       hours: "Mon-Sat: 9:00 AM - 7:00 PM",
       icon: <MapPin className="h-6 w-6 text-emerald-600" />
     },
     {
-      title: "Coimbatore Office", 
-      address: "229, Sathyamurthy Rd, Peranaidu Layout, Coimbatore, Tamil Nadu 641009",
-      phone: "+91 84319 66507",
+      title: "Yamlok Office", 
+      address: "Yamlok",
+      phone: "+91 1111110000",
       email: "info@cloudinstitution.com",
       hours: "Mon-Sat: 9:00 AM - 7:00 PM",
       icon: <MapPin className="h-6 w-6 text-emerald-600" />
@@ -30,23 +30,23 @@ export default function ContactPage() {
     {
       title: "Call Us",
       description: "Speak with our education counselors",
-      value: "+91 76763 70336",
+      value: "+91 1111110000",
       icon: <Phone className="h-8 w-8 text-emerald-600" />,
-      action: "tel:+917676370336"
+      action: "tel:+911111110000"
     },
     {
       title: "Email Us", 
       description: "Send us your queries anytime",
-      value: "info@cloudinstitution.com",
+      value: "info@chitragupt.com",
       icon: <Mail className="h-8 w-8 text-emerald-600" />,
-      action: "mailto:info@cloudinstitution.com"
+      action: "mailto:info@chitragupt.com"
     },
     {
       title: "WhatsApp",
       description: "Quick chat with our team",
       value: "Message Now",
       icon: <MessageSquare className="h-8 w-8 text-emerald-600" />,
-      action: "https://api.whatsapp.com/send?phone=917676370336"
+      action: "https://api.whatsapp.com/send?phone=911111110000"
     }
   ]
 
