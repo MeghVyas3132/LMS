@@ -124,14 +124,14 @@ export default function HeroSection() {
                       {slide.cta} <ArrowRight className="h-4 w-4" />
                     </Button>
                   </Link>
-                  <a href="tel:+917676370336">
+                  <a href="tel:+911111110000">
                     <Button
                       size="lg"
                       variant="outline"
                       className="border-emerald-600 text-emerald-600 hover:bg-emerald-50 dark:border-emerald-500 dark:text-emerald-400 dark:hover:bg-emerald-950 text-xs lg:text-sm px-4 py-3"
                     >
                       <Phone className="h-4 w-4 mr-2" />
-                      Call Now: +91 76763 70336
+                      Call Now: +91 1111110000
                     </Button>
                   </a>
                 </div>

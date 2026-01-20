@@ -308,10 +308,10 @@ export default function ContactPage() {
             Get personalized guidance from our education counselors today.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="tel:+917676370336">
+            <a href="tel:+911111110000">
               <Button size="lg" variant="secondary" className="bg-white text-emerald-600 hover:bg-slate-100">
                 <Phone className="h-4 w-4 mr-2" />
-                Call Now: +91 76763 70336
+                Call Now: +91 1111110000
               </Button>
             </a>
             <Link href="/courses">

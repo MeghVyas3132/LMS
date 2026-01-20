@@ -14,7 +14,7 @@ export default function Footer() {
               <span className="font-bold text-lg text-white">Chitragupt</span>
             </Link>
             <p className="text-gray-400 mb-4">
-              At Chitragupt, your trusted tech education hub in BTM Layout, Bangalore, we provide personalized, hands-on training in AWS, Azure, Google Cloud, DevOps, and more.
+              At Chitragupt, your trusted tech education hub in Yamlok, we provide personalized, hands-on training in AWS, Azure, Google Cloud, DevOps, and more.
             </p>
             <div className="flex gap-4">
               <a
