@@ -23,7 +23,6 @@ export default function CoursesPage() {
       duration: "24 weeks",
       level: "Intermediate",
       category: "Web & Application Development",
-      price: "₹30000",
       students: 1240,
       bgColor: "bg-emerald-50 dark:bg-emerald-900/20",
     },
@@ -35,7 +34,6 @@ export default function CoursesPage() {
       duration: "24 weeks",
       level: "Beginner",
       category: "Web & Application Development",
-      price: "₹30000",
       students: 980,
       bgColor: "bg-teal-50 dark:bg-teal-900/20",
     },
@@ -47,7 +45,6 @@ export default function CoursesPage() {
       duration: "6 weeks",
       level: "Advanced",
       category: "Cloud Computing",
-      price: "₹20000",
       students: 760,
       bgColor: "bg-emerald-50 dark:bg-emerald-900/20",
     },
@@ -59,7 +56,6 @@ export default function CoursesPage() {
       duration: "6 weeks",
       level: "Intermediate",
       category: "Cloud Computing",
-      price: "₹20000",
       students: 620,
       bgColor: "bg-teal-50 dark:bg-teal-900/20",
     },
@@ -71,7 +67,6 @@ export default function CoursesPage() {
       duration: "24 weeks",
       level: "Intermediate",
       category: "Cloud Computing",
-      price: "₹35000",
       students: 1450,
       bgColor: "bg-cyan-50 dark:bg-cyan-900/20",
     },
@@ -83,7 +78,6 @@ export default function CoursesPage() {
       duration: "6 weeks",
       level: "Advanced",
       category: "DevOps & Automation",
-      price: "₹20000",
       students: 540,
       bgColor: "bg-emerald-50 dark:bg-emerald-900/20",
     },
@@ -95,7 +89,6 @@ export default function CoursesPage() {
       duration: "24 weeks",
       level: "Advanced",
       category: "DevOps & Automation",
-      price: "₹35000",
       students: 820,
       bgColor: "bg-teal-50 dark:bg-teal-900/20",
     },
@@ -107,7 +100,6 @@ export default function CoursesPage() {
       duration: "12 weeks",
       level: "Intermediate",
       category: "Data Analytics",
-      price: "₹25000",
       students: 580,
       bgColor: "bg-cyan-50 dark:bg-cyan-900/20",
     },
@@ -181,8 +173,8 @@ export default function CoursesPage() {
                             <p className="font-medium text-gray-900 dark:text-white">{course.level}</p>
                           </div>
                           <div>
-                            <p className="text-gray-500 dark:text-gray-400">Price</p>
-                            <p className="font-medium text-emerald-700 dark:text-emerald-400">{course.price}</p>
+                            <p className="text-gray-500 dark:text-gray-400">Category</p>
+                            <p className="font-medium text-emerald-700 dark:text-emerald-400">{course.category}</p>
                           </div>
                           <div>
                             <p className="text-gray-500 dark:text-gray-400">Students</p>
@@ -213,9 +205,11 @@ export default function CoursesPage() {
           <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-8">
             Our education counselors can help you find the perfect course based on your career goals and interests.
           </p>
-          <Button className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white">
-            Schedule a Consultation
-          </Button>
+          <Link href="/contact">
+            <Button className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white">
+              Contact Us
+            </Button>
+          </Link>
         </div>
       </div>
     </MainLayout>

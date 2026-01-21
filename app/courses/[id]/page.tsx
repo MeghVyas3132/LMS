@@ -10,11 +10,6 @@ import {
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Textarea } from "@/components/ui/textarea"
-import "@/styles/phone-input.css"
 import {
   Award,
   BookOpen,
@@ -25,156 +20,14 @@ import {
   Globe,
   Home,
   MessageSquare,
-  PlayCircle,
+  Phone,
   Star,
   TrendingUp,
-  Users,
-  X
+  Users
 } from "lucide-react"
 import Link from "next/link"
 import { useParams } from "next/navigation"
 import { useEffect, useState } from "react"
-import PhoneInput from "react-phone-input-2"
-import "react-phone-input-2/lib/style.css"
-import { toast } from "sonner"
-
-// Google Sheets URL for enrollment data submission
-const GOOGLE_SHEETS_URL = process.env.NEXT_PUBLIC_GOOGLE_SHEETS_URL;
-
-// Function to submit enrollment data to Google Sheets
-const submitToGoogleSheets = async (enrollmentData: any, courseTitle: string) => {
-  // Check if Google Sheets URL is configured
-  if (!GOOGLE_SHEETS_URL) {
-    console.error('Google Sheets URL not configured. Please set NEXT_PUBLIC_GOOGLE_SHEETS_URL in your environment variables.')
-    return {
-      success: false,
-      error: 'Google Sheets integration not configured. Please contact support.',
-      details: {
-        message: 'NEXT_PUBLIC_GOOGLE_SHEETS_URL environment variable is not set'
-      }
-    }
-  }
-
-  console.log('=== SUBMITTING TO GOOGLE SHEETS ===')
-  console.log('Enrollment data:', enrollmentData)
-  console.log('Course title:', courseTitle)
-  console.log('Apps Script URL:', GOOGLE_SHEETS_URL)
-  
-  // Prepare data object with all required fields
-  const submissionData = {
-    firstName: enrollmentData.firstName || '',
-    lastName: enrollmentData.lastName || '',
-    email: enrollmentData.email || '',
-    phone: enrollmentData.phone || '',
-    city: enrollmentData.city || '',
-    currentEducation: enrollmentData.currentEducation || '',
-    experience: enrollmentData.experience || '',
-    motivation: enrollmentData.motivation || '',
-    preferredStartDate: enrollmentData.preferredStartDate || '',
-    paymentMethod: enrollmentData.paymentMethod || '',
-    courseTitle: courseTitle || '',
-    enrollmentDate: new Date().toLocaleString(),
-    testSubmission: 'false'
-  }
-  
-  console.log('Prepared submission data:', submissionData)
-  
-  // Method 1: Try FormData POST (most compatible with Apps Script)
-  try {
-    console.log('Method 1: Trying FormData POST...')
-    
-    const formData = new FormData()
-    Object.entries(submissionData).forEach(([key, value]) => {
-      formData.append(key, String(value))
-      console.log(`Added to FormData: ${key} = ${value}`)
-    })
-    
-    console.log('FormData prepared, sending request...')
-    
-    const response = await fetch(GOOGLE_SHEETS_URL, {
-      method: 'POST',
-      mode: 'no-cors', // Required to bypass CORS
-      body: formData
-    })
-    
-    console.log('FormData POST completed (no-cors mode)')
-    console.log('Response type:', response.type)
-    console.log('Response redirected:', response.redirected)
-    
-    // Wait for the data to be processed
-    console.log('Waiting 3 seconds for data processing...')
-    await new Promise(resolve => setTimeout(resolve, 3000))
-    
-    console.log('FormData submission completed successfully')
-    return { 
-      success: true, 
-      data: 'Data submitted successfully via FormData. Please check the Google Sheet to verify the data was saved.',
-      method: 'FormData POST',
-      note: 'Due to CORS restrictions, we cannot verify the response. Please check your Google Sheet.'
-    }
-    
-  } catch (error) {
-    console.error('Method 1 (FormData POST) failed:', error)
-    
-    // Method 2: Try GET with data parameter as fallback
-    try {
-      console.log('Method 2: Trying GET with data parameter...')
-      
-      // Simplify data for GET request to avoid URL length issues
-      const simpleData = {
-        firstName: submissionData.firstName,
-        lastName: submissionData.lastName,
-        email: submissionData.email,
-        phone: submissionData.phone,
-        courseTitle: submissionData.courseTitle,
-        timestamp: new Date().toISOString()
-      }
-      
-      const params = new URLSearchParams({
-        data: JSON.stringify(simpleData)
-      })
-      
-      const getUrl = GOOGLE_SHEETS_URL + '?' + params.toString()
-      console.log('GET URL length:', getUrl.length)
-      console.log('GET URL preview:', getUrl.substring(0, 200) + '...')
-      
-      if (getUrl.length > 2000) {
-        console.warn('URL is very long, might be truncated by some browsers')
-      }
-      
-      const response = await fetch(getUrl, {
-        method: 'GET',
-        mode: 'no-cors'
-      })
-      
-      console.log('GET request completed')
-      await new Promise(resolve => setTimeout(resolve, 2000))
-      
-      return { 
-        success: true, 
-        data: 'Data submitted successfully via GET method. Please check the Google Sheet.',
-        method: 'GET with data parameter',
-        note: 'Simplified data was sent due to URL length restrictions.'
-      }
-      
-    } catch (getError) {
-      console.error('Method 2 (GET) also failed:', getError)
-      
-      // Return error with helpful debugging info
-      return { 
-        success: false, 
-        error: 'All submission methods failed. Please check the troubleshooting steps.',
-        details: {
-          formDataError: error instanceof Error ? error.message : String(error),
-          getError: getError instanceof Error ? getError.message : String(getError),
-          appScriptUrl: GOOGLE_SHEETS_URL,
-          dataKeys: Object.keys(submissionData),
-          troubleshooting: 'Check Google Apps Script logs and ensure the script is deployed correctly.'
-        }
-      }
-    }
-  }
-}
 
 // Mapping of slugs to course IDs for the featured courses
 const slugToCourseMapping: { [key: string]: number } = {
@@ -203,8 +56,6 @@ const coursesData = [
     duration: "24 weeks",
     level: "Intermediate",
     category: "Web & Application Development",
-    price: "₹30000",
-    originalPrice: "₹45000",
     students: 1240,
     rating: 4.8,
     instructor: {
@@ -271,8 +122,6 @@ const coursesData = [
     duration: "24 weeks",
     level: "Beginner",
     category: "Web & Application Development", 
-    price: "₹30000",
-    originalPrice: "₹42000",
     students: 980,
     rating: 4.7,
     instructor: {
@@ -333,8 +182,6 @@ const coursesData = [
     duration: "6 weeks",
     level: "Advanced", 
     category: "Cloud Computing",
-    price: "₹20000",
-    originalPrice: "₹28000",
     students: 760,
     rating: 4.9,
     instructor: {
@@ -395,8 +242,6 @@ const coursesData = [
     duration: "6 weeks",
     level: "Intermediate",
     category: "Cloud Computing",
-    price: "₹20000",
-    originalPrice: "₹28000",
     students: 620,
     rating: 4.7,
     instructor: {
@@ -457,8 +302,6 @@ const coursesData = [
     duration: "24 weeks",
     level: "Intermediate",
     category: "Cloud Computing",
-    price: "₹35000",
-    originalPrice: "₹50000",
     students: 1450,
     rating: 4.8,
     instructor: {
@@ -519,8 +362,6 @@ const coursesData = [
     duration: "6 weeks",
     level: "Advanced",
     category: "DevOps & Automation",
-    price: "₹20000",
-    originalPrice: "₹30000",
     students: 540,
     rating: 4.9,
     instructor: {
@@ -581,8 +422,6 @@ const coursesData = [
     duration: "70 hrs",
     level: "Beginner to Intermediate",
     category: "Design",
-    price: "₹18000",
-    originalPrice: "₹25000",
     students: 600,
     rating: 4.8,
     instructor: {
@@ -643,8 +482,6 @@ const coursesData = [
     duration: "24 weeks",
     level: "Advanced",
     category: "DevOps & Automation",
-    price: "₹35000",
-    originalPrice: "₹48000",
     students: 820,
     rating: 4.8,
     instructor: {
@@ -705,8 +542,6 @@ const coursesData = [
     duration: "12 weeks",
     level: "Intermediate",
     category: "Data Analytics",
-    price: "₹25000",
-    originalPrice: "₹35000",
     students: 580,
     rating: 4.6,
     instructor: {
@@ -790,22 +625,6 @@ export default function CourseDetailPage() {
   const [course, setCourse] = useState<any>(null)
   const [loading, setLoading] = useState(true)
   const [isWishlisted, setIsWishlisted] = useState(false)
-  const [showEnrollModal, setShowEnrollModal] = useState(false)
-  const [enrollmentData, setEnrollmentData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    city: '',
-    currentEducation: '',
-    experience: '',
-    motivation: '',
-    preferredStartDate: '',
-    paymentMethod: '',
-    agreeToTerms: false
-  })
-  const [enrollmentLoading, setEnrollmentLoading] = useState(false)
-  const [enrollmentStep, setEnrollmentStep] = useState(1)
 
   useEffect(() => {
     let courseId: number | null = null
@@ -847,68 +666,6 @@ export default function CourseDetailPage() {
     setIsWishlisted(!isWishlisted)
   }
 
-  const handleEnroll = () => {
-    setShowEnrollModal(true)
-    setEnrollmentStep(1)
-  }
-
-  const handleEnrollmentSubmit = async () => {
-    if (enrollmentStep < 3) {
-      setEnrollmentStep(enrollmentStep + 1)
-      return
-    }
-
-    setEnrollmentLoading(true)
-    
-    try {
-      // Submit to Google Sheets
-      console.log('Submitting enrollment data to Google Sheets...')
-      const result = await submitToGoogleSheets(enrollmentData, course?.title || 'Unknown Course')
-      
-      if (result.success) {
-        setShowEnrollModal(false)
-        
-        // Show success message with toast
-        toast.success('Enrollment Successful!', {
-          description: `Successfully enrolled in ${course?.title}! Your enrollment has been recorded and our team will contact you soon.`,
-          duration: 5000,
-        })
-        
-        // Reset form
-        setEnrollmentData({
-          firstName: '',
-          lastName: '',
-          email: '',
-          phone: '',
-          city: '',
-          currentEducation: '',
-          experience: '',
-          motivation: '',
-          preferredStartDate: '',
-          paymentMethod: '',
-          agreeToTerms: false
-        })
-      } else {
-        throw new Error(typeof result.error === 'string' ? result.error : 'Failed to submit enrollment data')
-      }
-    } catch (error) {
-      console.error('Enrollment error:', error)
-      toast.error('Enrollment Failed', {
-        description: 'There was an error processing your enrollment. Please try again or contact support.',
-        duration: 5000,
-      })
-    } finally {
-      setEnrollmentLoading(false)
-    }
-  }
-
-  const handleInputChange = (field: string, value: string | boolean) => {
-    setEnrollmentData(prev => ({
-      ...prev,
-      [field]: value
-    }))
-  }
-
   if (loading) {
     return (
       <MainLayout>
@@ -937,326 +694,6 @@ export default function CourseDetailPage() {
 
   return (
     <MainLayout>
-      {/* Enrollment Modal */}
-      {showEnrollModal && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-gray-200 dark:border-gray-700">
-            <div className="p-6">
-              {/* Modal Header */}
-              <div className="flex items-center justify-between mb-6 pb-4 border-b border-gray-200 dark:border-gray-700">
-                <div>
-                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-                    Enroll in Course
-                  </h2>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                    {course?.title}
-                  </p>
-                </div>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setShowEnrollModal(false)}
-                  className="h-8 w-8 p-0 hover:bg-gray-100 dark:hover:bg-gray-700"
-                >
-                  <X className="h-4 w-4" />
-                </Button>
-              </div>
-
-              {/* Progress Steps */}
-              <div className="mb-8">
-                <div className="flex items-center justify-center">
-                  <div className="flex items-center gap-4">
-                    {[
-                      { step: 1, title: "Personal Information" },
-                      { step: 2, title: "Background Information" },
-                      { step: 3, title: "Payment & Confirmation" }
-                    ].map(({ step, title }, index) => (
-                      <div key={step} className="flex items-center">
-                        <div className="flex flex-col items-center">
-                          <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold transition-colors ${
-                            enrollmentStep >= step 
-                              ? 'bg-emerald-600 text-white shadow-lg' 
-                              : 'bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400'
-                          }`}>
-                            {enrollmentStep > step ? <CheckCircle className="h-5 w-5" /> : step}
-                          </div>
-                          <span className={`mt-2 text-xs font-medium text-center max-w-20 leading-tight ${
-                            enrollmentStep >= step 
-                              ? 'text-emerald-600 dark:text-emerald-400' 
-                              : 'text-gray-500 dark:text-gray-400'
-                          }`}>
-                            {title}
-                          </span>
-                        </div>
-                        {index < 2 && (
-                          <div className={`w-16 h-px mx-4 transition-colors ${
-                            enrollmentStep > step ? 'bg-emerald-600' : 'bg-gray-200 dark:bg-gray-700'
-                          }`} />
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Step Content */}
-              {enrollmentStep === 1 && (
-                <div className="space-y-6">
-                  <div className="text-center mb-6">
-                    <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-                      Personal Information
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-400">
-                      Let us know about yourself
-                    </p>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="firstName">First Name <span className="text-red-500">*</span></Label>
-                      <Input
-                        id="firstName"
-                        value={enrollmentData.firstName}
-                        onChange={(e) => handleInputChange('firstName', e.target.value)}
-                        placeholder="Enter your first name"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="lastName">Last Name <span className="text-red-500">*</span></Label>
-                      <Input
-                        id="lastName"
-                        value={enrollmentData.lastName}
-                        onChange={(e) => handleInputChange('lastName', e.target.value)}
-                        placeholder="Enter your last name"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email Address <span className="text-red-500">*</span></Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      value={enrollmentData.email}
-                      onChange={(e) => handleInputChange('email', e.target.value)}
-                      placeholder="Enter your email address"
-                    />
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="phone">Phone Number <span className="text-red-500">*</span></Label>
-                      <PhoneInput
-                        country={'in'}
-                        value={enrollmentData.phone}
-                        onChange={(value) => handleInputChange('phone', value)}
-                        inputClass="phone-input-field"
-                        containerClass="phone-input-container"
-                        buttonClass="phone-input-dropdown"
-                        dropdownClass="phone-input-dropdown-list"
-                        searchClass="search-class"
-                        enableSearch={true}
-                        disableSearchIcon={false}
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="city">City <span className="text-red-500">*</span></Label>
-                      <Input
-                        id="city"
-                        value={enrollmentData.city}
-                        onChange={(e) => handleInputChange('city', e.target.value)}
-                        placeholder="Enter your city"
-                      />
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {enrollmentStep === 2 && (
-                <div className="space-y-6">
-                  <div className="text-center mb-6">
-                    <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-                      Background Information
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-400">
-                      Help us understand your experience level
-                    </p>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="currentEducation">Current Education Level</Label>
-                    <Select onValueChange={(value) => handleInputChange('currentEducation', value)}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select your education level" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="high-school">High School</SelectItem>
-                        <SelectItem value="undergraduate">Undergraduate</SelectItem>
-                        <SelectItem value="graduate">Graduate</SelectItem>
-                        <SelectItem value="post-graduate">Post Graduate</SelectItem>
-                        <SelectItem value="professional">Professional Certification</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="experience">Professional Experience</Label>
-                    <Select onValueChange={(value) => handleInputChange('experience', value)}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select your experience level" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="fresher">Fresher (0 years)</SelectItem>
-                        <SelectItem value="1-2">1-2 years</SelectItem>
-                        <SelectItem value="3-5">3-5 years</SelectItem>
-                        <SelectItem value="5-10">5-10 years</SelectItem>
-                        <SelectItem value="10+">10+ years</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="motivation">Why are you interested in this course?</Label>
-                    <Textarea
-                      id="motivation"
-                      value={enrollmentData.motivation}
-                      onChange={(e) => handleInputChange('motivation', e.target.value)}
-                      placeholder="Tell us about your goals and motivation for taking this course"
-                      rows={4}
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="preferredStartDate">Preferred Start Date</Label>
-                    <Input
-                      id="preferredStartDate"
-                      type="date"
-                      value={enrollmentData.preferredStartDate}
-                      onChange={(e) => handleInputChange('preferredStartDate', e.target.value)}
-                    />
-                  </div>
-                </div>
-              )}
-
-              {enrollmentStep === 3 && (
-                <div className="space-y-6">
-                  <div className="text-center mb-6">
-                    <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-                      Payment & Confirmation
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-400">
-                      Review your enrollment details
-                    </p>
-                  </div>
-
-                  {/* Course Summary */}
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="text-lg">Course Summary</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="space-y-3">
-                        <div className="flex justify-between">
-                          <span className="text-gray-600 dark:text-gray-400">Course</span>
-                          <span className="font-medium">{course?.title}</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-gray-600 dark:text-gray-400">Duration</span>
-                          <span className="font-medium">{course?.duration}</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-gray-600 dark:text-gray-400">Level</span>
-                          <span className="font-medium">{course?.level}</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-gray-600 dark:text-gray-400">Price</span>
-                          <span className="font-semibold text-emerald-600">{course?.price}</span>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="paymentMethod">Payment Method</Label>
-                    <Select onValueChange={(value) => handleInputChange('paymentMethod', value)}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select payment method" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="credit-card">Credit Card</SelectItem>
-                        <SelectItem value="debit-card">Debit Card</SelectItem>
-                        <SelectItem value="upi">UPI</SelectItem>
-                        <SelectItem value="net-banking">Net Banking</SelectItem>
-                        <SelectItem value="emi">EMI</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div className="flex items-start gap-3 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                    <input
-                      type="checkbox"
-                      id="agreeToTerms"
-                      checked={enrollmentData.agreeToTerms}
-                      onChange={(e) => handleInputChange('agreeToTerms', e.target.checked)}
-                      className="mt-1 h-4 w-4 text-emerald-600 focus:ring-emerald-500 border-gray-300 rounded"
-                    />
-                    <Label htmlFor="agreeToTerms" className="text-sm cursor-pointer">
-                      I agree to the{' '}
-                      <Link href="/terms" className="text-emerald-600 hover:underline font-medium">
-                        Terms and Conditions
-                      </Link>{' '}
-                      and{' '}
-                      <Link href="/privacy" className="text-emerald-600 hover:underline font-medium">
-                        Privacy Policy
-                      </Link>
-                    </Label>
-                  </div>
-                </div>
-              )}
-
-              {/* Modal Actions */}
-              <div className="flex justify-between items-center mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
-                <Button
-                  variant="outline"
-                  onClick={() => {
-                    if (enrollmentStep > 1) {
-                      setEnrollmentStep(enrollmentStep - 1)
-                    } else {
-                      setShowEnrollModal(false)
-                    }
-                  }}
-                  className="min-w-24"
-                >
-                  {enrollmentStep > 1 ? 'Previous' : 'Cancel'}
-                </Button>
-
-                <Button
-                  onClick={handleEnrollmentSubmit}
-                  disabled={
-                    enrollmentLoading ||
-                    (enrollmentStep === 1 && (!enrollmentData.firstName || !enrollmentData.lastName || !enrollmentData.email || !enrollmentData.phone || !enrollmentData.city)) ||
-                    (enrollmentStep === 2 && (!enrollmentData.currentEducation || !enrollmentData.experience)) ||
-                    (enrollmentStep === 3 && (!enrollmentData.paymentMethod || !enrollmentData.agreeToTerms))
-                  }
-                  className="bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed min-w-32"
-                >
-                  {enrollmentLoading ? (
-                    <div className="flex items-center gap-2">
-                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-                      Processing...
-                    </div>
-                  ) : enrollmentStep < 3 ? (
-                    'Next Step'
-                  ) : (
-                    'Complete Enrollment'
-                  )}
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
         {/* Breadcrumb */}
         <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
@@ -1309,10 +746,12 @@ export default function CourseDetailPage() {
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <Button size="lg" className="bg-white text-emerald-600 hover:bg-gray-100" onClick={handleEnroll}>
-                    <PlayCircle className="h-5 w-5 mr-2" />
-                    Enroll Now
-                  </Button>
+                  <Link href="/contact">
+                    <Button size="lg" className="bg-white text-emerald-600 hover:bg-gray-100">
+                      <Phone className="h-5 w-5 mr-2" />
+                      Contact Us
+                    </Button>
+                  </Link>
                   <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
                     <Download className="h-5 w-5 mr-2" />
                     Download Syllabus
@@ -1330,13 +769,7 @@ export default function CourseDetailPage() {
                     />
                   </div>
                   <div className="text-center">
-                    <div className="flex items-center justify-center gap-2 mb-2">
-                      <span className="text-2xl font-bold">{course.price}</span>
-                      {course.originalPrice && (
-                        <span className="text-emerald-200 line-through">{course.originalPrice}</span>
-                      )}
-                    </div>
-                    <p className="text-emerald-100 text-sm">One-time payment • Lifetime access</p>
+                    <p className="text-emerald-100 text-sm">Contact us for pricing and enrollment details</p>
                   </div>
                 </div>
               </div>
@@ -1472,17 +905,12 @@ export default function CourseDetailPage() {
 
             {/* Sidebar */}
             <div className="space-y-6">
-              {/* Enrollment Card */}
+              {/* Course Details Card */}
               <Card>
                 <CardContent className="p-6">
                   <div className="text-center mb-6">
-                    <div className="flex items-center justify-center gap-2 mb-2">
-                      <span className="text-3xl font-bold text-emerald-600">{course.price}</span>
-                      {course.originalPrice && (
-                        <span className="text-gray-500 line-through">{course.originalPrice}</span>
-                      )}
-                    </div>
-                    <p className="text-gray-600 dark:text-gray-400">One-time payment</p>
+                    <h3 className="text-xl font-bold text-emerald-600 mb-2">Course Details</h3>
+                    <p className="text-gray-600 dark:text-gray-400">Contact us for enrollment</p>
                   </div>
 
                   <div className="space-y-4 mb-6">
@@ -1508,9 +936,12 @@ export default function CourseDetailPage() {
                   </div>
 
                   <div className="space-y-3">
-                    <Button className="w-full bg-emerald-600 hover:bg-emerald-700" onClick={handleEnroll}>
-                      Enroll Now
-                    </Button>
+                    <Link href="/contact">
+                      <Button className="w-full bg-emerald-600 hover:bg-emerald-700">
+                        <Phone className="h-4 w-4 mr-2" />
+                        Contact Us
+                      </Button>
+                    </Link>
                     <Button 
                       variant="outline" 
                       className="w-full"
@@ -1522,10 +953,10 @@ export default function CourseDetailPage() {
 
                   <div className="mt-6 p-4 bg-emerald-50 dark:bg-emerald-950/20 rounded-lg">
                     <h4 className="font-semibold text-emerald-800 dark:text-emerald-200 mb-2">
-                      Money-Back Guarantee
+                      Need More Information?
                     </h4>
                     <p className="text-sm text-emerald-700 dark:text-emerald-300">
-                      30-day money-back guarantee if you're not satisfied with the course.
+                      Our counselors are here to help you choose the right course for your career goals.
                     </p>
                   </div>
                 </CardContent>
@@ -1549,7 +980,7 @@ export default function CourseDetailPage() {
                               {relatedCourse.description.substring(0, 80)}...
                             </p>
                             <div className="flex justify-between items-center">
-                              <span className="font-semibold text-emerald-600">{relatedCourse.price}</span>
+                              <span className="text-sm text-gray-500">{relatedCourse.duration}</span>
                               <div className="flex items-center gap-1">
                                 <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
                                 <span className="text-xs">{relatedCourse.rating}</span>

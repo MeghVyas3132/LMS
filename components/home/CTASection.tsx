@@ -23,10 +23,10 @@ export default function CTASection() {
             Join thousands of students who have transformed their careers with our courses. Get industry-recognized certification and guaranteed placement assistance.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="tel:+917676370336">
+            <a href="tel:+911111110000">
               <Button size="lg" variant="secondary" className="gap-2 bg-white dark:bg-slate-900 text-emerald-600 dark:text-emerald-400 hover:bg-slate-100 dark:hover:bg-slate-800">
                 <Phone className="h-4 w-4" />
-                Call Now: +91 76763 70336
+                Call Now: +91 1111110000
               </Button>
             </a>
             <Link href="/courses">
@@ -34,7 +34,7 @@ export default function CTASection() {
                 Explore Courses <ArrowRight className="h-4 w-4" />
               </Button>
             </Link>
-            <a href="https://api.whatsapp.com/send?phone=917676370336" target="_blank" rel="noopener noreferrer">
+            <a href="https://api.whatsapp.com/send?phone=911111110000" target="_blank" rel="noopener noreferrer">
               <Button
                 size="lg"
                 variant="outline"

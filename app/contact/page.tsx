@@ -9,17 +9,17 @@ import MainLayout from "@/components/main-layout"
 export default function ContactPage() {
   const contactInfo = [
     {
-      title: "Bangalore Office",
-      address: "No 15, 20th Main, 100ft Ring Road, BTM 2nd Stage, Bangalore – 560076",
-      phone: "+91 76763 70336",
+      title: "Yamlok Office",
+      address: "Yamlok",
+      phone: "+91 1111110000",
       email: "info@cloudinstitution.com",
       hours: "Mon-Sat: 9:00 AM - 7:00 PM",
       icon: <MapPin className="h-6 w-6 text-emerald-600" />
     },
     {
-      title: "Coimbatore Office", 
-      address: "229, Sathyamurthy Rd, Peranaidu Layout, Coimbatore, Tamil Nadu 641009",
-      phone: "+91 84319 66507",
+      title: "Yamlok Office", 
+      address: "Yamlok",
+      phone: "+91 1111110000",
       email: "info@cloudinstitution.com",
       hours: "Mon-Sat: 9:00 AM - 7:00 PM",
       icon: <MapPin className="h-6 w-6 text-emerald-600" />
@@ -30,23 +30,23 @@ export default function ContactPage() {
     {
       title: "Call Us",
       description: "Speak with our education counselors",
-      value: "+91 76763 70336",
+      value: "+91 1111110000",
       icon: <Phone className="h-8 w-8 text-emerald-600" />,
-      action: "tel:+917676370336"
+      action: "tel:+911111110000"
     },
     {
       title: "Email Us", 
       description: "Send us your queries anytime",
-      value: "info@cloudinstitution.com",
+      value: "info@chitragupt.com",
       icon: <Mail className="h-8 w-8 text-emerald-600" />,
-      action: "mailto:info@cloudinstitution.com"
+      action: "mailto:info@chitragupt.com"
     },
     {
       title: "WhatsApp",
       description: "Quick chat with our team",
       value: "Message Now",
       icon: <MessageSquare className="h-8 w-8 text-emerald-600" />,
-      action: "https://api.whatsapp.com/send?phone=917676370336"
+      action: "https://api.whatsapp.com/send?phone=911111110000"
     }
   ]
 
@@ -60,7 +60,7 @@ export default function ContactPage() {
               Contact Us
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white">
-              Get in Touch with Cloud Institution
+              Get in Touch with Chitragupt
             </h1>
             <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
               Have questions about our courses? Need guidance on your career path? Our expert counselors are here to help you make the right choice for your future.
@@ -284,7 +284,7 @@ export default function ContactPage() {
               },
               {
                 question: "Do you provide certificates?",
-                answer: "Yes, upon successful completion of any course, you will receive an industry-recognized certificate from Cloud Institution."
+                answer: "Yes, upon successful completion of any course, you will receive an industry-recognized certificate from Chitragupt."
               }
             ].map((faq, index) => (
               <Card key={index} className="dark:bg-slate-800">
@@ -308,10 +308,10 @@ export default function ContactPage() {
             Get personalized guidance from our education counselors today.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="tel:+917676370336">
+            <a href="tel:+911111110000">
               <Button size="lg" variant="secondary" className="bg-white text-emerald-600 hover:bg-slate-100">
                 <Phone className="h-4 w-4 mr-2" />
-                Call Now: +91 76763 70336
+                Call Now: +91 1111110000
               </Button>
             </a>
             <Link href="/courses">

@@ -84,11 +84,6 @@ export default function Header() {
             )}
             <span className="sr-only">Toggle theme</span>
           </Button>
-          <Link href="/login">
-            <Button variant="outline" className="border-emerald-600 text-emerald-600 hover:bg-emerald-50 dark:border-emerald-500 dark:text-emerald-400 dark:hover:bg-emerald-950 hidden md:inline-flex">
-              Login
-            </Button>
-          </Link>
           
           {/* Mobile Menu Button */}
           <Button
@@ -126,11 +121,6 @@ export default function Header() {
               </Link>
               <Link href="/contact" className={`${getLinkClasses("/contact")} block`}>
                 Contact
-              </Link>
-              <Link href="/login">
-                <Button variant="outline" className="w-full border-emerald-600 text-emerald-600 hover:bg-emerald-50 dark:border-emerald-500 dark:text-emerald-400 dark:hover:bg-emerald-950">
-                  Login
-                </Button>
               </Link>
             </nav>
           </motion.div>

@@ -56,7 +56,7 @@ async function sendWelcomeEmail(studentData: StudentCreationData) {
     <html>
     <head>
         <meta charset="utf-8">
-        <title>Welcome to Cloud Institution</title>
+        <title>Welcome to Chitragupt</title>
         <style>
             body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
             .container { max-width: 600px; margin: 0 auto; padding: 20px; }
@@ -83,14 +83,14 @@ async function sendWelcomeEmail(studentData: StudentCreationData) {
     <body>
         <div class="container">
             <div class="header">
-                <h1>🎉 Welcome to Cloud Institution!</h1>
+                <h1>🎉 Welcome to Chitragupt!</h1>
                 <p>Your learning journey starts here</p>
             </div>
             
             <div class="content">
                 <p>Dear <span class="highlight">${studentData.name}</span>,</p>
                 
-                <p>Congratulations! Your student account has been successfully created at Cloud Institution. You're now ready to begin your educational journey with us.</p>
+                <p>Congratulations! Your student account has been successfully created at Chitragupt. You're now ready to begin your educational journey with us.</p>
                 
                 <div class="credentials">
                     <h3>🔐 Your Login Credentials</h3>
@@ -130,12 +130,12 @@ async function sendWelcomeEmail(studentData: StudentCreationData) {
                 <p>If you have any questions or need assistance, please don't hesitate to contact our support team.</p>
                 
                 <p>Best regards,<br>
-                <strong>Cloud Institution Team</strong></p>
+                <strong>Chitragupt Team</strong></p>
             </div>
             
             <div class="footer">
                 <p>This is an automated email. Please do not reply to this email address.</p>
-                <p>© ${new Date().getFullYear()} Cloud Institution. All rights reserved.</p>
+                <p>© ${new Date().getFullYear()} Chitragupt. All rights reserved.</p>
             </div>
         </div>
     </body>
@@ -144,11 +144,11 @@ async function sendWelcomeEmail(studentData: StudentCreationData) {
 
   // Create plain text version
   const textTemplate = `
-Welcome to Cloud Institution!
+Welcome to Chitragupt!
 
 Dear ${studentData.name},
 
-Congratulations! Your student account has been successfully created at Cloud Institution.
+Congratulations! Your student account has been successfully created at Chitragupt.
 
 LOGIN CREDENTIALS:
 - Email: ${studentData.username}
@@ -175,11 +175,11 @@ SECURITY TIPS:
 If you have any questions or need assistance, please don't hesitate to contact our support team.
 
 Best regards,
-Cloud Institution Team
+Chitragupt Team
 
 ---
 This is an automated email. Please do not reply to this email address.
-© ${new Date().getFullYear()} Cloud Institution. All rights reserved.
+© ${new Date().getFullYear()} Chitragupt. All rights reserved.
   `;
 
   try {
@@ -212,9 +212,9 @@ This is an automated email. Please do not reply to this email address.
     // If transporter is configured, send email
     if (transporter) {
       const mailOptions = {
-        from: `"Cloud Institution" <${process.env.GMAIL_USER || process.env.SMTP_USER}>`,
+        from: `"Chitragupt" <${process.env.GMAIL_USER || process.env.SMTP_USER}>`,
         to: studentData.username,
-        subject: "Welcome to Cloud Institution - Your Account Details",
+        subject: "Welcome to Chitragupt - Your Account Details",
         text: textTemplate,
         html: htmlTemplate
       };
@@ -245,7 +245,7 @@ This is an automated email. Please do not reply to this email address.
       console.log('\n✅ WELCOME EMAIL SENT SUCCESSFULLY:');
       console.log('=====================================');
       console.log(`To: ${studentData.username}`);
-      console.log(`Subject: Welcome to Cloud Institution - Your Account Details`);
+      console.log(`Subject: Welcome to Chitragupt - Your Account Details`);
       console.log(`Student: ${studentData.name}`);
       console.log(`Student ID: ${studentData.studentId}`);
       console.log(`Message ID: ${result.messageId}`);
@@ -272,7 +272,7 @@ This is an automated email. Please do not reply to this email address.
       console.log('');
       console.log('📧 EMAIL CONTENT (Would be sent):');
       console.log(`To: ${studentData.username}`);
-      console.log(`Subject: Welcome to Cloud Institution - Your Account Details`);
+      console.log(`Subject: Welcome to Chitragupt - Your Account Details`);
       console.log(`Student: ${studentData.name} (${studentData.studentId})`);
       console.log(`Password: ${studentData.password}`);
       console.log(`Course Mode: ${studentData.courseMode}`);
@@ -288,7 +288,7 @@ This is an automated email. Please do not reply to this email address.
         queuedAt: new Date().toISOString(),
         reason: 'No email configuration found',
         emailData: {
-          subject: "Welcome to Cloud Institution - Your Account Details",
+          subject: "Welcome to Chitragupt - Your Account Details",
           studentInfo: {
             name: studentData.name,
             studentId: studentData.studentId,
@@ -322,7 +322,7 @@ This is an automated email. Please do not reply to this email address.
       failedAt: new Date().toISOString(),
       error: error.message,
       emailData: {
-        subject: "Welcome to Cloud Institution - Your Account Details",
+        subject: "Welcome to Chitragupt - Your Account Details",
         studentInfo: {
           name: studentData.name,
           studentId: studentData.studentId,

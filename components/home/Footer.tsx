@@ -14,7 +14,7 @@ export default function Footer() {
               <span className="font-bold text-lg text-white">Chitragupt</span>
             </Link>
             <p className="text-gray-400 mb-4">
-              At Chitragupt, your trusted tech education hub in BTM Layout, Bangalore, we provide personalized, hands-on training in AWS, Azure, Google Cloud, DevOps, and more.
+              At Chitragupt, your trusted tech education hub in Yamlok, we provide personalized, hands-on training in AWS, Azure, Google Cloud, DevOps, and more.
             </p>
             <div className="flex gap-4">
               <a
@@ -158,11 +158,12 @@ export default function Footer() {
             <h3 className="font-semibold text-lg mb-4 text-emerald-400">Contact Us</h3>
             <address className="not-italic text-gray-400 space-y-2">
               <div className="mb-4">
-                <h4 className="font-medium text-white mb-2">yamlok</h4>
+                <h4 className="font-medium text-white mb-2">Bangalore</h4>
                 <div className="flex items-start gap-2">
                   <MapPin className="h-5 w-5 text-emerald-400 mt-0.5" />
                   <p>
-                    Prabhu ke charno me<br /> – 0001
+                    No 15, 20th Main, 100ft Ring Road,<br />
+                    BTM 2nd Stage, Bangalore – 560076
                   </p>
                 </div>
                 <div className="flex items-center gap-2 mt-2">
@@ -171,6 +172,20 @@ export default function Footer() {
                 </div>
               </div>
               
+              <div>
+                <h4 className="font-medium text-white mb-2">Coimbatore</h4>
+                <div className="flex items-start gap-2">
+                  <MapPin className="h-5 w-5 text-emerald-400 mt-0.5" />
+                  <p>
+                    229, Sathyamurthy Rd, Peranaidu Layout,<br />
+                    Coimbatore, Tamil Nadu 641009
+                  </p>
+                </div>
+                <div className="flex items-center gap-2 mt-2">
+                  <Phone className="h-5 w-5 text-emerald-400" />
+                  <p>+91 84319 66507</p>
+                </div>
+              </div>
               
               <div className="flex items-center gap-2 mt-4">
                 <Mail className="h-5 w-5 text-emerald-400" />
@@ -181,7 +196,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-          <p>&copy; {new Date().getFullYear()} Cloud Institution. All rights reserved. | Powered By Cloud Institution</p>
+          <p>&copy; {new Date().getFullYear()} Chitragupt. All rights reserved. | Powered By Chitragupt</p>
         </div>
       </div>
     </footer>

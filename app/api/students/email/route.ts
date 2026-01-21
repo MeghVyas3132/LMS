@@ -57,7 +57,7 @@ const createEmailTemplate = (subject: string, message: string, recipientName: st
       </head>
       <body>
         <div class="header">
-          <div class="institution-name">🎓 Cloud Institution</div>
+          <div class="institution-name">🎓 Chitragupt</div>
           <div class="subtitle">Learning Management System</div>
         </div>
         <div class="content">
@@ -67,8 +67,8 @@ const createEmailTemplate = (subject: string, message: string, recipientName: st
           </div>
         </div>
         <div class="footer">
-          <p>This email was sent from Cloud Institution LMS</p>
-          <p>© ${new Date().getFullYear()} Cloud Institution. All rights reserved.</p>
+          <p>This email was sent from Chitragupt LMS</p>
+          <p>© ${new Date().getFullYear()} Chitragupt. All rights reserved.</p>
         </div>
       </body>
       </html>
@@ -79,8 +79,8 @@ Hello ${recipientName},
 ${message}
 
 ---
-This email was sent from Cloud Institution LMS
-© ${new Date().getFullYear()} Cloud Institution. All rights reserved.
+This email was sent from Chitragupt LMS
+© ${new Date().getFullYear()} Chitragupt. All rights reserved.
     `
   };
 };
@@ -286,7 +286,7 @@ export async function POST(request: NextRequest) {
         const emailTemplate = createEmailTemplate(subject, message, student.name);
         
         const { data, error } = await resend.emails.send({
-          from: 'Cloud Institution <noreply@cloudinstitution.in>', // ✅ Now using your verified domain
+          from: 'Chitragupt <noreply@cloudinstitution.in>', // ✅ Now using your verified domain
           to: [student.email],
           subject: subject,
           html: emailTemplate.html,

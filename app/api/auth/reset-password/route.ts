@@ -68,7 +68,7 @@ async function sendOTPEmail(email: string, otp: string, userName: string) {
       <html>
       <head>
           <meta charset="utf-8">
-          <title>Password Reset OTP - Cloud Institution</title>
+          <title>Password Reset OTP - Chitragupt</title>
           <style>
               body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
               .container { max-width: 600px; margin: 0 auto; padding: 20px; }
@@ -103,13 +103,13 @@ async function sendOTPEmail(email: string, otp: string, userName: string) {
           <div class="container">
               <div class="header">
                   <h1>🔐 Password Reset Request</h1>
-                  <p>Cloud Institution LMS</p>
+                  <p>Chitragupt LMS</p>
               </div>
               
               <div class="content">
                   <p>Hello <strong>${userName}</strong>,</p>
                   
-                  <p>We received a request to reset your password for your Cloud Institution LMS account.</p>
+                  <p>We received a request to reset your password for your Chitragupt LMS account.</p>
                   
                   <div class="otp-box">
                       <h3>Your OTP Code</h3>
@@ -132,12 +132,12 @@ async function sendOTPEmail(email: string, otp: string, userName: string) {
                   <p>If you have any questions or need assistance, please contact our support team.</p>
                   
                   <p>Best regards,<br>
-                  <strong>Cloud Institution Team</strong></p>
+                  <strong>Chitragupt Team</strong></p>
               </div>
               
               <div class="footer">
                   <p>This is an automated email. Please do not reply to this email address.</p>
-                  <p>© ${new Date().getFullYear()} Cloud Institution. All rights reserved.</p>
+                  <p>© ${new Date().getFullYear()} Chitragupt. All rights reserved.</p>
               </div>
           </div>
       </body>
@@ -145,11 +145,11 @@ async function sendOTPEmail(email: string, otp: string, userName: string) {
     `;
 
     const textTemplate = `
-Password Reset OTP - Cloud Institution
+Password Reset OTP - Chitragupt
 
 Hello ${userName},
 
-We received a request to reset your password for your Cloud Institution LMS account.
+We received a request to reset your password for your Chitragupt LMS account.
 
 Your OTP Code: ${otp}
 
@@ -166,17 +166,17 @@ SECURITY NOTICE:
 If you have any questions or need assistance, please contact our support team.
 
 Best regards,
-Cloud Institution Team
+Chitragupt Team
 
 ---
 This is an automated email. Please do not reply to this email address.
-© ${new Date().getFullYear()} Cloud Institution. All rights reserved.
+© ${new Date().getFullYear()} Chitragupt. All rights reserved.
     `;
 
     const mailOptions = {
-      from: `"Cloud Institution" <${process.env.GMAIL_USER || process.env.SMTP_USER}>`,
+      from: `"Chitragupt" <${process.env.GMAIL_USER || process.env.SMTP_USER}>`,
       to: email,
-      subject: "Password Reset OTP - Cloud Institution LMS",
+      subject: "Password Reset OTP - Chitragupt LMS",
       text: textTemplate,
       html: htmlTemplate
     };
@@ -290,7 +290,7 @@ export async function POST(request: NextRequest) {
         sentAt: new Date().toISOString(),
         userType: userType,
         emailData: {
-          subject: "Password Reset OTP - Cloud Institution LMS",
+          subject: "Password Reset OTP - Chitragupt LMS",
           otp: otpCode,
           userName: userData.name
         }
