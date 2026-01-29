@@ -85,7 +85,7 @@ export default function StudentProgrammingTaskPage() {
     setStudentName(name || 'Student')
     
     if (!id) {
-      router.push('/login')
+      setLoading(false)
       return
     }
     

@@ -62,7 +62,7 @@ export default function StudentProgrammingPage() {
         
         if (!id) {
           console.log("No student ID found in session")
-          router.push('/login')
+          setLoading(false)
           return
         }
 
@@ -140,7 +140,6 @@ export default function StudentProgrammingPage() {
   const startTask = (taskId: string) => {
     const studentId = getStudentSession()?.id || getStudentSession()?.studentId;
     if (!studentId) {
-      router.push('/login');
       return;
     }
     router.push(`/student/programming/${taskId}`);
