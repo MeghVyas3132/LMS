@@ -137,10 +137,30 @@ export function storeStudentSession(studentData: any): void {
 }
 
 /**
+ * Demo student data for college project demonstration
+ */
+const DEMO_STUDENT = {
+  id: "demo-student-001",
+  studentId: "STU2024001",
+  name: "Demo Student",
+  username: "demo",
+  password: "demo123",
+  phoneNumber: "+91 9876543210",
+  coursesEnrolled: 1,
+  joinedDate: "2024-01-15",
+  courseName: "AWS Certificate Training",
+  status: "Active" as const,
+  email: "demo@example.com"
+}
+
+/**
  * Get stored student data from session
+ * Returns demo student data if no session exists (for college project demo)
  */
 export function getStudentSession(): any {
-  return getSessionItem(SESSION_KEYS.STUDENT_DATA)
+  const sessionData = getSessionItem(SESSION_KEYS.STUDENT_DATA)
+  // Return demo student if no session exists (demo mode for college project)
+  return sessionData || DEMO_STUDENT
 }
 
 /**
