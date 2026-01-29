@@ -666,6 +666,50 @@ export default function CourseDetailPage() {
     setIsWishlisted(!isWishlisted)
   }
 
+  const handleDownload = async () => {
+    if (!course) return
+
+    // Dynamically import jspdf to avoid SSR issues
+    const { jsPDF } = await import('jspdf')
+    const doc = new jsPDF()
+
+    doc.setFontSize(18)
+    doc.text(course.title, 14, 20)
+
+    doc.setFontSize(12)
+    doc.text(`Category: ${course.category}    Duration: ${course.duration}`, 14, 30)
+    doc.text(' ', 14, 36)
+
+    // Description
+    const splitDesc = doc.splitTextToSize(course.fullDescription || course.description, 180)
+    doc.text(splitDesc, 14, 46)
+
+    let y = 46 + splitDesc.length * 6 + 6
+
+    // Curriculum
+    doc.setFontSize(14)
+    doc.text('Curriculum', 14, y)
+    y += 6
+    doc.setFontSize(11)
+
+    course.curriculum.forEach((module: any, idx: number) => {
+      if (y > 270) {
+        doc.addPage()
+        y = 20
+      }
+      doc.text(`${idx + 1}. ${module.module} (${module.duration}) - ${module.lessons} lessons`, 14, y)
+      y += 6
+      const topics = module.topics.join(', ')
+      const split = doc.splitTextToSize(`Topics: ${topics}`, 180)
+      doc.text(split, 16, y)
+      y += split.length * 6 + 4
+    })
+
+    // Footer
+    const fileName = `${course.title.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_syllabus.pdf`
+    doc.save(fileName)
+  }
+
   if (loading) {
     return (
       <MainLayout>
@@ -752,7 +796,12 @@ export default function CourseDetailPage() {
                       Contact Us
                     </Button>
                   </Link>
-                  <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="border-white text-white hover:bg-white/10"
+                    onClick={handleDownload}
+                  >
                     <Download className="h-5 w-5 mr-2" />
                     Download Syllabus
                   </Button>
