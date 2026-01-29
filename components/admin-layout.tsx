@@ -47,10 +47,16 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
     // First check session storage (for backward compatibility)
     const data = getAdminSession()
     
-    if (!data && !user) {
-      router.push("/login")
-      return
+    // For demo mode, create a demo admin if no session exists
+    const DEMO_ADMIN = {
+      id: "demo-admin",
+      name: "Demo Admin",
+      email: "admin@demo.com",
+      username: "admin@demo.com",
+      role: "admin" as const
     }
+    
+    const adminInfo = data || DEMO_ADMIN
       // If we have user claims, use those for role-based access
     if (userClaims) {
       const role = userClaims.role || 'teacher'
@@ -64,25 +70,25 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       
       // Update admin data with claims
       const updatedData = {
-        ...data,
+        ...adminInfo,
         role: role,
-        name: user?.displayName || data?.name || 'User',
-        email: user?.email || data?.username || '',
-        id: user?.uid || data?.id
+        name: user?.displayName || adminInfo?.name || 'User',
+        email: user?.email || adminInfo?.username || '',
+        id: user?.uid || adminInfo?.id
       }
       
       setAdminData(updatedData)
       console.log('Updated admin data with claims:', updatedData)
-    } else if (data) {
-      // Fall back to session storage data
+    } else if (adminInfo) {
+      // Fall back to session storage data or demo admin
       // Check if the user can access this page based on role
-      if (data.role && !canAccessPath(data.role, pathname)) {
+      if (adminInfo.role && !canAccessPath(adminInfo.role, pathname)) {
         // Redirect to dashboard if trying to access unauthorized page
         router.push("/admin/dashboard")
         return
       }
       
-      setAdminData(data)
+      setAdminData(adminInfo)
     }
   }, [router, pathname, user, userClaims, loading])
 
