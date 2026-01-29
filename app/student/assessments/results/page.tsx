@@ -22,9 +22,8 @@ export default function QuizResults() {
       const studentData = getStudentSession();
       if (!studentData) {
         if (isMounted) {
-          setError("Please log in to view your results");
+          setError("No student data available");
           setLoading(false);
-          router.push("/login");
         }
         return;
       }

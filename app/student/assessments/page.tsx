@@ -216,7 +216,7 @@ export default function AssessmentsPage() {
 
       fetchQuizzes();
     } else {
-      router.push("/login");
+      setLoading(false);
     }
   }, [router]);
 
