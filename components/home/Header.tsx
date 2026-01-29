@@ -2,15 +2,13 @@
 
 import { Button } from "@/components/ui/button"
 import { AnimatePresence, motion } from "framer-motion"
-import { GraduationCap, Menu, Moon, Sun, X } from "lucide-react"
-import { useTheme } from "next-themes"
+import { GraduationCap, Menu, X } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
 import Image from "next/image"
 
 export default function Header() {
-  const { theme, setTheme } = useTheme()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
   const pathname = usePathname()
@@ -56,6 +54,9 @@ export default function Header() {
           <Link href="/courses" className={getLinkClasses("/courses")}>
             Courses
           </Link>
+          <Link href="/videos" className={getLinkClasses("/videos")}>
+            Videos
+          </Link>
           <Link href="/about" className={getLinkClasses("/about")}>
             About Us
           </Link>
@@ -71,20 +72,6 @@ export default function Header() {
         </nav>          
         
         <div className="flex items-center gap-4">
-          <Button 
-            variant="ghost" 
-            size="icon" 
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            className="text-emerald-600 dark:text-emerald-400"
-          >
-            {mounted ? (
-              theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />
-            ) : (
-              <div className="h-5 w-5" />
-            )}
-            <span className="sr-only">Toggle theme</span>
-          </Button>
-          
           {/* Mobile Menu Button */}
           <Button
             variant="ghost"
@@ -109,6 +96,9 @@ export default function Header() {
             <nav className="container mx-auto px-4 py-4 flex flex-col space-y-4">
               <Link href="/courses" className={`${getLinkClasses("/courses")} block`}>
                 Courses
+              </Link>
+              <Link href="/videos" className={`${getLinkClasses("/videos")} block`}>
+                Videos
               </Link>
               <Link href="/about" className={`${getLinkClasses("/about")} block`}>
                 About Us
