@@ -134,31 +134,31 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
               <ul className="space-y-2">
                 <li>
                   <Link
-                    href="/courses/web-development"
+                    href="/courses"
                     className="text-gray-400 hover:text-emerald-400 transition-colors"
                   >
-                    Web Development
+                    All Courses
                   </Link>
                 </li>
                 <li>
-                  <Link href="/courses/data-science" className="text-gray-400 hover:text-emerald-400 transition-colors">
-                    Data Science
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/courses/cloud-computing"
-                    className="text-gray-400 hover:text-emerald-400 transition-colors"
-                  >
-                    Cloud Computing
+                  <Link href="/videos" className="text-gray-400 hover:text-emerald-400 transition-colors">
+                    Course Videos
                   </Link>
                 </li>
                 <li>
                   <Link
-                    href="/courses/mobile-development"
+                    href="/about"
                     className="text-gray-400 hover:text-emerald-400 transition-colors"
                   >
-                    Mobile Development
+                    About Us
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/contact"
+                    className="text-gray-400 hover:text-emerald-400 transition-colors"
+                  >
+                    Contact
                   </Link>
                 </li>
               </ul>
