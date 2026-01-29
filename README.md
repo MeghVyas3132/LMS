@@ -840,9 +840,6 @@ This project was built during a 3-month internship at Chitragupt/Cloud Instituti
 ---
 
 <p align="center">
-  Made with ❤️ for Cloud Institution
+  Made with for Cloud Institution
 </p>
 
-<p align="center">
-  <a href="https://www.cloudinstitution.in/">🌐 Visit Live Site</a>
-</p>
