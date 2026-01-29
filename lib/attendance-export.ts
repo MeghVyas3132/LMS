@@ -110,11 +110,81 @@ export function createExcelWorkbook(data: any[], student: Student | null, dateRa
 
 /**
  * Export attendance summary to PDF
- * This is a placeholder - you'd need to implement PDF generation
  */
-export const exportAttendanceToPDF = (records: AttendanceRecord[], student: Student, summary: any) => {
-  // This would typically use a PDF library like pdfmake, jspdf, etc.
-  console.log('PDF export not yet implemented');
+export const exportAttendanceToPDF = async (records: AttendanceRecord[], student: Student, summary: any) => {
+  // Dynamically import jspdf to avoid SSR issues
+  const { jsPDF } = await import('jspdf')
+  const doc = new jsPDF()
+  
+  // Title
+  doc.setFontSize(18)
+  doc.text('Attendance Report', 14, 20)
+  
+  // Student Info
+  doc.setFontSize(12)
+  doc.text(`Student: ${student.name}`, 14, 32)
+  doc.text(`Student ID: ${student.studentId || student.id}`, 14, 40)
+  doc.text(`Course: ${student.courseName || 'N/A'}`, 14, 48)
+  doc.text(`Generated: ${format(new Date(), 'dd/MM/yyyy')}`, 14, 56)
+  
+  // Summary Section
+  doc.setFontSize(14)
+  doc.text('Summary', 14, 70)
+  doc.setFontSize(11)
+  
+  const presentCount = records.filter(r => r.status === 'present').length
+  const absentCount = records.filter(r => r.status === 'absent').length
+  const lateCount = records.filter(r => r.status === 'late').length
+  const totalRecords = records.length
+  const attendancePercent = totalRecords > 0 ? ((presentCount + lateCount) / totalRecords * 100).toFixed(1) : '0'
+  
+  doc.text(`Total Classes: ${totalRecords}`, 14, 80)
+  doc.text(`Present: ${presentCount}`, 14, 88)
+  doc.text(`Absent: ${absentCount}`, 14, 96)
+  doc.text(`Late: ${lateCount}`, 14, 104)
+  doc.text(`Attendance Rate: ${attendancePercent}%`, 14, 112)
+  
+  // Attendance Records Table
+  let y = 126
+  doc.setFontSize(14)
+  doc.text('Attendance Records', 14, y)
+  y += 10
+  
+  doc.setFontSize(10)
+  // Table Header
+  doc.text('Date', 14, y)
+  doc.text('Day', 50, y)
+  doc.text('Status', 90, y)
+  doc.text('Time In', 130, y)
+  doc.text('Time Out', 160, y)
+  y += 6
+  
+  // Draw header line
+  doc.setDrawColor(200, 200, 200)
+  doc.line(14, y, 195, y)
+  y += 4
+  
+  // Table Rows
+  records.forEach((record) => {
+    if (y > 270) {
+      doc.addPage()
+      y = 20
+    }
+    
+    const date = formatDate(record.date)
+    const day = new Date(record.date).toLocaleDateString('en-US', { weekday: 'short' })
+    
+    doc.text(date, 14, y)
+    doc.text(day, 50, y)
+    doc.text(capitalizeFirstLetter(record.status), 90, y)
+    doc.text(record.timeIn || '-', 130, y)
+    doc.text(record.timeOut || '-', 160, y)
+    y += 6
+  })
+  
+  // Save the PDF
+  const fileName = `${student.name.replace(/\s+/g, '_')}_attendance_${format(new Date(), 'yyyy-MM-dd')}.pdf`
+  doc.save(fileName)
 };
 
 // Helper function to format date

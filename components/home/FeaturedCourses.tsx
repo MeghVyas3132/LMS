@@ -16,7 +16,9 @@ const featuredCourses = [
     mode: "Classroom/Online",
     rating: 5,
     students: "2000+",
-    image: "/AWS.png"
+    image: "/AWS.png",
+    price: "₹24,999",
+    originalPrice: "₹39,999"
   },
   {
     title: "Azure Certificate Training",
@@ -27,7 +29,9 @@ const featuredCourses = [
     mode: "Classroom/Online",
     rating: 5,
     students: "1500+",
-    image: "/Azure.png"
+    image: "/Azure.png",
+    price: "₹22,999",
+    originalPrice: "₹35,999"
   },
   {
     title: "Google Cloud Certification",
@@ -38,7 +42,9 @@ const featuredCourses = [
     mode: "Classroom/Online", 
     rating: 5,
     students: "1200+",
-    image: "/DevOps.png"
+    image: "/DevOps.png",
+    price: "₹21,999",
+    originalPrice: "₹34,999"
   },
   {
     title: "Python Full-Stack Training",
@@ -49,7 +55,9 @@ const featuredCourses = [
     mode: "Classroom/Online",
     rating: 5,
     students: "800+",
-    image: "/Java.png"
+    image: "/Java.png",
+    price: "₹49,999",
+    originalPrice: "₹79,999"
   },
   {
     title: "UI/UX Design Training",
@@ -60,7 +68,9 @@ const featuredCourses = [
     mode: "Classroom/Online",
     rating: 5,
     students: "600+",
-    image: "/UI UX Design.png"
+    image: "/UI UX Design.png",
+    price: "₹18,999",
+    originalPrice: "₹29,999"
   },
   {
     title: "Data Analytics Training",
@@ -71,7 +81,9 @@ const featuredCourses = [
     mode: "Classroom/Online",
     rating: 5,
     students: "900+",
-    image: "/data_analytics.png"
+    image: "/data_analytics.png",
+    price: "₹44,999",
+    originalPrice: "₹69,999"
   }
 ]
 
@@ -118,13 +130,22 @@ export default function FeaturedCourses() {
                 </CardHeader>
                 <CardContent className="flex-1">
                   <div className="space-y-3">
-                    <div className="flex items-center gap-2">
-                      <div className="flex">
-                        {[...Array(course.rating)].map((_, i) => (
-                          <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                        ))}
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <div className="flex">
+                          {[...Array(course.rating)].map((_, i) => (
+                            <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                          ))}
+                        </div>
+                        <span className="text-sm text-gray-600 dark:text-slate-400">({course.students} students)</span>
                       </div>
-                      <span className="text-sm text-gray-600 dark:text-slate-400">({course.students} students)</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">{course.price}</span>
+                      <span className="text-sm text-gray-500 dark:text-slate-500 line-through">{course.originalPrice}</span>
+                      <span className="text-xs bg-red-100 dark:bg-red-900/50 text-red-600 dark:text-red-400 px-2 py-0.5 rounded-full font-medium">
+                        {Math.round((1 - parseInt(course.price.replace(/[₹,]/g, '')) / parseInt(course.originalPrice.replace(/[₹,]/g, ''))) * 100)}% OFF
+                      </span>
                     </div>
                     <div className="flex justify-between text-sm">
                       <div className="flex items-center gap-1">
