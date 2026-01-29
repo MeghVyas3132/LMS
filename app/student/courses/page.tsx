@@ -67,8 +67,6 @@ export default function CoursesPage() {
       }
       
       fetchInitialData()
-    } else {
-      router.push("/login")
     }
     setIsLoading(false)
   }, [router])

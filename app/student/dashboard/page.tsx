@@ -233,28 +233,25 @@ function DashboardContent() {
   // Fetch initial data on component mount
   useEffect(() => {
     const studentData = getStudentSession()
-    if (!studentData) {
-      console.warn("No student data in session, redirecting to login")
-      router.push("/login")
-      return
+    if (studentData) {
+      setStudent({
+        id: studentData.id,
+        name: studentData.name,
+        username: studentData.username,
+        password: studentData.password || "",
+        phoneNumber: studentData.phoneNumber || "",
+        coursesEnrolled: studentData.coursesEnrolled || 0,
+        studentId: studentData.studentId,
+        joinedDate: studentData.joinedDate || new Date().toISOString(),
+        courseName: studentData.courseName || "",
+        status: studentData.status || "Active"
+      })
+
+      setIsLoading(false)
+      const unsubscribe = fetchAttendanceData(studentData.id, studentData.studentId)
+      return () => unsubscribe && unsubscribe()
     }
-
-    setStudent({
-      id: studentData.id,
-      name: studentData.name,
-      username: studentData.username,
-      password: studentData.password || "",
-      phoneNumber: studentData.phoneNumber || "",
-      coursesEnrolled: studentData.coursesEnrolled || 0,
-      studentId: studentData.studentId,
-      joinedDate: studentData.joinedDate || new Date().toISOString(),
-      courseName: studentData.courseName || "",
-      status: studentData.status || "Active"
-    })
-
     setIsLoading(false)
-    const unsubscribe = fetchAttendanceData(studentData.id, studentData.studentId)
-    return () => unsubscribe && unsubscribe()
   }, [router])
   // Fetch completed lessons and quiz statistics
   useEffect(() => {
