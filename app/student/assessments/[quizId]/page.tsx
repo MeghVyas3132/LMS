@@ -28,9 +28,8 @@ export default function AttemptQuizPage() {
       
       if (!quizId || !studentData) {
         if (isMounted) {
-          setError("Quiz ID is missing or you are not logged in");
+          setError("Quiz ID is missing");
           setLoading(false);
-          router.push('/login');
         }
         return;
       }      try {

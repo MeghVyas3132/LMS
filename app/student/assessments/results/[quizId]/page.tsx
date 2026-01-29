@@ -24,9 +24,8 @@ export default function DetailedQuizResult() {
       const studentData = getStudentSession();
       if (!studentData || !quizId) {
         if (isMounted) {
-          setError("Please log in or provide a valid quiz ID");
+          setError("Please provide a valid quiz ID");
           setLoading(false);
-          router.push('/login');
         }
         return;
       }      try {
