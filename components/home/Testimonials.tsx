@@ -6,11 +6,16 @@ import { Star } from "lucide-react"
 import Link from "next/link"
 import { motion } from "framer-motion"
 
+// Helper function to generate avatar URL from name
+const getAvatarUrl = (name: string, bgColor: string) => {
+  return `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=${bgColor}&color=fff&size=128&bold=true`
+}
+
 const realTestimonials = [
   {
     name: "Rahul Kumar",
     role: "AWS Solutions Architect at TechCorp",
-    image: "/placeholder-user.jpg",
+    image: getAvatarUrl("Rahul Kumar", "10b981"),
     testimonial: "The AWS certification training gave me all the skills I needed to land my dream job. The hands-on experience and expert mentorship were invaluable throughout my journey.",
     rating: 5,
     course: "AWS Certification"
@@ -18,7 +23,7 @@ const realTestimonials = [
   {
     name: "Priya Sharma",
     role: "DevOps Engineer at CloudSys",
-    image: "/placeholder-user.jpg",
+    image: getAvatarUrl("Priya Sharma", "6366f1"),
     testimonial: "I had no prior experience in DevOps, but the course structure made it easy to follow. The real-world projects prepared me for actual workplace challenges.",
     rating: 5,
     course: "DevOps Training"
@@ -26,7 +31,7 @@ const realTestimonials = [
   {
     name: "Amit Patel",
     role: "Data Scientist at FinTech Solutions",
-    image: "/placeholder-user.jpg",
+    image: getAvatarUrl("Amit Patel", "f59e0b"),
     testimonial: "The data analytics course was comprehensive and practical. I was able to implement machine learning models at my new job from day one.",
     rating: 5,
     course: "Data Analytics"
@@ -34,7 +39,7 @@ const realTestimonials = [
   {
     name: "Sneha Reddy",
     role: "UI/UX Designer at DesignCorp",
-    image: "/placeholder-user.jpg",
+    image: getAvatarUrl("Sneha Reddy", "ec4899"),
     testimonial: "The UI/UX design training helped me transition from development to design. The portfolio projects were impressive to potential employers.",
     rating: 5,
     course: "UI/UX Design"
@@ -42,7 +47,7 @@ const realTestimonials = [
   {
     name: "Vikram Singh",
     role: "Python Developer at StartupHub",
-    image: "/placeholder-user.jpg",
+    image: getAvatarUrl("Vikram Singh", "3b82f6"),
     testimonial: "The full-stack Python course was exactly what I needed. The 360-hour program covered everything from basics to advanced frameworks.",
     rating: 5,
     course: "Python Full-Stack"
@@ -50,7 +55,7 @@ const realTestimonials = [
   {
     name: "Anitha Joseph",
     role: "Digital Marketing Manager at MarketingPro",
-    image: "/placeholder-user.jpg",
+    image: getAvatarUrl("Anitha Joseph", "8b5cf6"),
     testimonial: "The advanced digital marketing course gave me cutting-edge strategies. I increased my company's ROI by 200% using the techniques learned.",
     rating: 5,
     course: "Digital Marketing"
@@ -58,7 +63,7 @@ const realTestimonials = [
   {
     name: "Karthik Reddy",
     role: "Azure Cloud Engineer at Microsoft",
-    image: "/placeholder-user.jpg",
+    image: getAvatarUrl("Karthik Reddy", "0ea5e9"),
     testimonial: "Chitragupt's Azure training was comprehensive and hands-on. The practical labs and real-world scenarios prepared me perfectly for my current role.",
     rating: 5,
     course: "Azure Certification"
@@ -66,7 +71,7 @@ const realTestimonials = [
   {
     name: "Meera Nair",
     role: "Full Stack Developer at Infosys",
-    image: "/placeholder-user.jpg",
+    image: getAvatarUrl("Meera Nair", "14b8a6"),
     testimonial: "The training quality exceeded my expectations. From basics to advanced concepts, everything was covered systematically with excellent support.",
     rating: 5,
     course: "Full Stack Development"
@@ -74,7 +79,7 @@ const realTestimonials = [
   {
     name: "Rohan Gupta",
     role: "Cloud Architect at Wipro",
-    image: "/placeholder-user.jpg",
+    image: getAvatarUrl("Rohan Gupta", "f97316"),
     testimonial: "Best investment in my career! The multi-cloud training helped me become a certified cloud architect. The placement assistance was outstanding.",
     rating: 5,
     course: "Multi-Cloud"
@@ -82,7 +87,7 @@ const realTestimonials = [
   {
     name: "Divya Krishnan",
     role: "Business Analyst at Accenture",
-    image: "/placeholder-user.jpg",
+    image: getAvatarUrl("Divya Krishnan", "ef4444"),
     testimonial: "The data analytics program transformed my career completely. From a non-technical background to landing a role at Accenture - amazing journey!",
     rating: 5,
     course: "Data Analytics"
