@@ -429,15 +429,11 @@ export default function StudentAttendance() {
 
     // Use session storage approach like other student pages
     const studentData = getStudentSession()
-    if (!studentData) {
-      console.warn("No student data in session, redirecting to login")
-      router.push("/login")
-      return
+    if (studentData) {
+      console.log("Student data found in session, loading attendance data")
+      // Fetch immediately when student data is available
+      fetchAttendanceData()
     }
-
-    console.log("Student data found in session, loading attendance data")
-    // Fetch immediately when student data is available
-    fetchAttendanceData()
 
     // TEMPORARILY COMMENTED OUT REAL-TIME LISTENERS TO PREVENT AUTH ISSUES
     /* 
