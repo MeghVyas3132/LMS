@@ -18,7 +18,7 @@ export function useStudentSession(callback: (studentData: any) => void) {
     useEffect(() => {
     let isMounted = true;
     
-    // Get student data from localStorage
+    // Get student data from localStorage (now returns demo data if no session)
     const studentData = getStudentSession()
     
     if (studentData) {
@@ -26,9 +26,8 @@ export function useStudentSession(callback: (studentData: any) => void) {
       stableCallback(studentData)
       if (isMounted) setIsLoading(false)
     } else {
-      // No valid session, redirect to login
-      console.warn("No student session found, redirecting to login")
-      router.push('/login')
+      // No session - just stop loading, don't redirect
+      if (isMounted) setIsLoading(false)
     }
     
     return () => {
